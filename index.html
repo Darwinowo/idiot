@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pregunta importante</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #F0F0F0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            color: black;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .btn-si {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .btn-no {
+            background-color: #F44336;
+            color: white;
+            position: absolute;
+        }
+        #advertencia {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #FFDD57;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        #advertencia h2 {
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>¿Eres idiota?</h1>
+    <button class="btn-si" id="si-button">Sí</button>
+    <button class="btn-no" id="no-button">No</button>
+
+    <div id="advertencia">
+        <h2>No puedes salir de aquí, pillín</h2>
+    </div>
+
+    <script>
+        const noButton = document.getElementById('no-button');
+        const siButton = document.getElementById('si-button');
+        const advertencia = document.getElementById('advertencia');
+
+        // Mover el botón "No"
+        noButton.addEventListener('mouseover', function() {
+            const maxWidth = window.innerWidth - noButton.offsetWidth;
+            const maxHeight = window.innerHeight - noButton.offsetHeight;
+            const randomX = Math.floor(Math.random() * maxWidth);
+            const randomY = Math.floor(Math.random() * (maxHeight - 150)) + 150;
+            noButton.style.left = randomX + 'px';
+            noButton.style.top = randomY + 'px';
+        });
+
+        // Respuesta al hacer clic en "Sí"
+        siButton.addEventListener('click', function() {
+            document.querySelector('h1').textContent = "¡Lo sabía! 😉";
+            siButton.disabled = true;
+            noButton.disabled = true;
+        });
+
+        // Advertencia cuando se intenta cerrar la página
+        window.onbeforeunload = function() {
+            advertencia.style.display = 'block';
+            return false;
+        };
+    </script>
+</body>
+</html>
